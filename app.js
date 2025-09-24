@@ -1,7 +1,20 @@
 let map;
 let marker;
 
-// Inicializa el mapa centrado en El Salvador
+// 🔥 Configura Firebase
+const firebaseConfig = {
+  apiKey: "TU_API_KEY",
+  authDomain: "TU_DOMINIO.firebaseapp.com",
+  projectId: "TU_ID_PROYECTO",
+  storageBucket: "TU_BUCKET.appspot.com",
+  messagingSenderId: "TU_ID_MENSAJES",
+  appId: "TU_APP_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// 🗺️ Inicializa el mapa
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 13.7, lng: -88.1 },
@@ -9,7 +22,7 @@ function initMap() {
   });
 }
 
-// Maneja el formulario de IMEI
+// 💾 Guarda el IMEI
 document.getElementById('imeiForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const imei = document.getElementById('imei').value.trim();
@@ -22,11 +35,17 @@ document.getElementById('imeiForm').addEventListener('submit', function(e) {
   }
 });
 
-// Maneja el rastreo de ubicación con alta precisión
+// 📍 Rastrea ubicación y guarda en Firebase
 document.getElementById('trackBtn').addEventListener('click', function() {
+  const imei = localStorage.getItem('imei');
+  if (!imei) {
+    document.getElementById('locationOutput').textContent = 'Primero debes guardar un IMEI válido.';
+    return;
+  }
+
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(
-      function(position) {
+      async function(position) {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
         const accuracy = position.coords.accuracy;
@@ -46,6 +65,14 @@ document.getElementById('trackBtn').addEventListener('click', function() {
           position: userLocation,
           map: map,
           title: "Tu ubicación",
+        });
+
+        // 🔄 Guarda en Firestore
+        await db.collection("rastreo").doc(imei).set({
+          latitud: lat,
+          longitud: lon,
+          precision: accuracy,
+          timestamp: new Date()
         });
       },
       function(error) {
