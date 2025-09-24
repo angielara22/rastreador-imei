@@ -4,17 +4,18 @@ let marker;
 // 🔥 Configura Firebase
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     const firebaseConfig = {
-    apiKey: "AIzaSyDXNa3EkAnqRVwyuUEfhthMJVK3YULEVjU",
-    authDomain: "rastreador-bd145.firebaseapp.com",
-    projectId: "rastreador-bd145",
-    storageBucket: "rastreador-bd145.firebasestorage.app",
-    messagingSenderId: "193680392707",
-    appId: "1:193680392707:web:1dcd236ea9b3a5fb8e4436",
-    measurementId: "G-Q5B5Q76FBX"
+        apiKey: "AIzaSyBXNtjMi3yZyZPnUxSsUC_CqPsVALSXdQg",
+        authDomain: "rastreador-2dfc6.firebaseapp.com",
+        projectId: "rastreador-2dfc6",
+        storageBucket: "rastreador-2dfc6.firebasestorage.app",
+        messagingSenderId: "749426760297",
+        appId: "1:749426760297:web:5e9a0dd54eaef27d60e0f8",
+        measurementId: "G-V6CW4JYJ84"
     };
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
 
 // 🗺️ Inicializa el mapa
 function initMap() {
