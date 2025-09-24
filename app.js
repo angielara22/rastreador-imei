@@ -2,14 +2,16 @@ let map;
 let marker;
 
 // 🔥 Configura Firebase
-const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_DOMINIO.firebaseapp.com",
-  projectId: "TU_ID_PROYECTO",
-  storageBucket: "TU_BUCKET.appspot.com",
-  messagingSenderId: "TU_ID_MENSAJES",
-  appId: "TU_APP_ID"
-};
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+    apiKey: "AIzaSyDXNa3EkAnqRVwyuUEfhthMJVK3YULEVjU",
+    authDomain: "rastreador-bd145.firebaseapp.com",
+    projectId: "rastreador-bd145",
+    storageBucket: "rastreador-bd145.firebasestorage.app",
+    messagingSenderId: "193680392707",
+    appId: "1:193680392707:web:1dcd236ea9b3a5fb8e4436",
+    measurementId: "G-Q5B5Q76FBX"
+    };
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
