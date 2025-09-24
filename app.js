@@ -22,16 +22,17 @@ document.getElementById('imeiForm').addEventListener('submit', function(e) {
   }
 });
 
-// Maneja el rastreo de ubicación
+// Maneja el rastreo de ubicación con alta precisión
 document.getElementById('trackBtn').addEventListener('click', function() {
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(
       function(position) {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
 
         document.getElementById('locationOutput').textContent =
-          `Ubicación actual: Latitud ${lat}, Longitud ${lon}`;
+          `Ubicación actual: Latitud ${lat}, Longitud ${lon} (Precisión: ±${Math.round(accuracy)} metros)`;
 
         const userLocation = { lat: lat, lng: lon };
         map.setCenter(userLocation);
@@ -50,6 +51,11 @@ document.getElementById('trackBtn').addEventListener('click', function() {
       function(error) {
         document.getElementById('locationOutput').textContent =
           'Error al obtener ubicación: ' + error.message;
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
       }
     );
   } else {
