@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de IMEI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Registro de IMEI</h1>
+
+  <form id="imeiForm">
+    <label for="imei">IMEI del dispositivo:</label>
+    <input type="text" id="imei" name="imei" required>
+    <button type="submit">Guardar</button>
+  </form>
+
+  <button id="trackBtn">Rastrear ubicación</button>
+  <div id="locationOutput"></div>
+  <div id="output"></div>
+  <div id="map" style="width: 100%; height: 400px; margin-top: 20px;"></div>
+
+  <!-- Firebase SDKs (solo si vas a guardar ubicación en Firestore) -->
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js"></script>
+
+  <!-- Tu archivo JavaScript -->
+  <script src="app.js"></script>
+
+  <!-- Google Maps API (reemplaza TU_CLAVE_API con tu clave real) -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=TU_CLAVE_API&callback=initMap">
+  </script>
+</body>
+</html>
